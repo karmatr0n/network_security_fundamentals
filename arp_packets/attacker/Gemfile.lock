@@ -1,0 +1,11 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    packetfu (1.1.13)
+      pcaprub
+    pcaprub (0.13.1)
+
+
+DEPENDENCIES
+  packetfu (~> 1.1, >= 1.1.13)
+

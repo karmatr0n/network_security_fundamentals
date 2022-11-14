@@ -1,0 +1,83 @@
+networks:
+  net90:
+    name: net90
+    ipam:
+      config:
+        - subnet: 192.168.90.0/24
+
+  net100:
+    name: net100
+    ipam:
+      config:
+        - subnet: 192.168.100.0/24
+
+services:
+  router:
+    image: nicolaka/netshoot
+    container_name: router
+    tty: true
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv4.ip_forward=1
+    networks:
+      net90:
+        ipv4_address: 192.168.90.11
+      net100:
+        ipv4_address: 192.168.100.11
+    mac_address: 02:42:C0:A8:5A:0D
+    command: bash -c "
+              ip route del default  &&
+              ip route add default via 192.168.90.1 &&
+              tail -f /dev/null
+          "
+  tcp_server:
+    build: ./tcp_server
+    container_name: tcp_server
+    cap_add:
+      - NET_ADMIN
+    networks:
+      net90:
+        ipv4_address: 192.168.90.10
+    mac_address: 02:42:C0:A8:5A:0A
+    command: sh -c "
+              ip route add 192.168.100.0/24 via 192.168.90.11 &&
+              ruby /app/tcp_server.rb
+            "
+    depends_on:
+      - router
+
+  victim:
+    build: ./victim
+    container_name: victim
+    cap_add:
+      - NET_ADMIN
+    networks:
+      net100:
+        ipv4_address: 192.168.100.2
+    mac_address: 02:42:C0:A8:5A:0B
+    command: sh -c "
+              ip route del default &&
+              ip route add default via 192.168.100.11 &&
+              ruby /app/tcp_client.rb
+            "
+    depends_on:
+      - router
+      - tcp_server
+
+  attacker:
+    build: ./attacker
+    container_name: attacker
+    cap_add:
+      - NET_ADMIN
+    networks:
+      net100:
+        ipv4_address: 192.168.100.3
+    mac_address: 02:42:C0:A8:5A:0C
+    command: sh -c "
+                ruby /app/sniffer.rb
+            "
+    depends_on:
+      - router
+      - tcp_server
+      - victim
