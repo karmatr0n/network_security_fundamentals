@@ -1,0 +1,28 @@
+version: '3'
+services:
+  sniffer:
+    build: ./sniffer
+    container_name: sniffer
+    restart: unless-stopped
+    mac_address: 02:42:ab:aa:bb:01
+    networks:
+      - demo-network
+
+  packet_sender:
+    build: ./packet_sender
+    container_name: packet_sender
+    restart: unless-stopped
+    mac_address: 02:42:ab:aa:bb:02
+    networks:
+      - demo-network
+
+networks:
+  demo-network:
+    driver: macvlan
+    driver_opts:
+      ipvlan_mode: l3
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.16.0/24
+          gateway: 192.168.16.1
