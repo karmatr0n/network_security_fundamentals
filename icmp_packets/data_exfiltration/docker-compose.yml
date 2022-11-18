@@ -1,0 +1,26 @@
+version: '3'
+services:
+  compromised_host:
+    build: ./compromised_host
+    container_name: compromised_host
+    restart: unless-stopped
+    networks:
+      icmp-exfil-network:
+        ipv4_address: 192.168.32.11
+
+  destination_host:
+    build: ./destination_host
+    container_name: destination_host
+    restart: unless-stopped
+    networks:
+      icmp-exfil-network:
+        ipv4_address: 192.168.32.42
+
+networks:
+  icmp-exfil-network:
+    name: icmp-exfil-network
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.32.0/24
+          gateway: 192.168.32.1
