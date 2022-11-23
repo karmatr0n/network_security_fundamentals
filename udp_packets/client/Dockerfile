@@ -10,7 +10,7 @@ RUN apk update \
   libpcap-dev \
   build-base \
   net-tools \
-  vim \
+  neovim \
   arp-scan \
   tcpdump
 
