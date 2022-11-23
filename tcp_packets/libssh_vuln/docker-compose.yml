@@ -1,0 +1,27 @@
+version: '3'
+services:
+  vuln_server:
+    build: ./vuln_server
+    container_name: vuln_server
+    restart: unless-stopped
+    networks:
+      ssh-network:
+        ipv4_address: 192.168.52.11
+
+  ssh_attacker:
+    build: ./ssh_attacker
+    container_name: ssh_attacker
+    restart: unless-stopped
+    networks:
+      ssh-network:
+        ipv4_address: 192.168.52.42
+    command: sh -c 'tail -f /dev/null'
+
+networks:
+  ssh-network:
+    name: ssh-network
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.52.0/24
+          gateway: 192.168.52.1
