@@ -1,0 +1,26 @@
+version: '3'
+services:
+  server:
+    build: ./server
+    container_name: server
+    restart: unless-stopped
+    networks:
+      udp_network:
+        ipv4_address: 192.168.42.11
+
+  client:
+    build: ./client
+    container_name: client
+    restart: unless-stopped
+    networks:
+      udp_network:
+        ipv4_address: 192.168.42.42
+
+networks:
+  udp_network:
+    name: udp_network
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.42.0/24
+          gateway: 192.168.42.1
