@@ -3,7 +3,8 @@ FROM alpine:3.16.2
 RUN apk update \
   && apk upgrade \
   && apk add --no-cache \
-  ruby
+  ruby \
+  neovim
 
 ENV APP_HOME /app
 RUN mkdir $APP_HOME

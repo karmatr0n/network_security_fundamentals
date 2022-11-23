@@ -10,7 +10,7 @@ RUN apk update \
   libpcap-dev \
   build-base \
   net-tools \
-  vim \
+  neovim \
   tcpdump
 
 ENV APP_HOME /app

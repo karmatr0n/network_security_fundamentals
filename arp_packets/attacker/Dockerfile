@@ -11,7 +11,7 @@ RUN apk update \
   build-base \
   iproute2 \
   net-tools \
-  vim \
+  neovim \
   arp-scan \
   tcpdump 
 
