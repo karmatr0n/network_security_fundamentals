@@ -11,4 +11,3 @@ cap.stream.each do |raw_packet|
    puts ''
 end
 
-
