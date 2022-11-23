@@ -1,0 +1,26 @@
+version: '3'
+services:
+  tcp_server:
+    build: ./tcp_server
+    container_name: tcp_server_transmissions
+    restart: unless-stopped
+    networks:
+      tcp_network:
+        ipv4_address: 192.168.62.11
+
+  tcp_client:
+    build: ./tcp_client
+    container_name: tcp_client
+    restart: unless-stopped
+    networks:
+      tcp_network:
+        ipv4_address: 192.168.62.42
+
+networks:
+  tcp_network:
+    name: tcp_network
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.62.0/24
+          gateway: 192.168.62.1
