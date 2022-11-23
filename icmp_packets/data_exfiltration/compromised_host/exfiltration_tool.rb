@@ -9,7 +9,6 @@ def encrypt_payload(string, key = 0x42)
   string.bytes.map {|b| b ^ key }.pack('C*')
 end
 
-
 File.readlines(file).each do |line|
   icmp_packet = PacketFu::ICMPPacket.new(:config => config)
   icmp_packet.ip_daddr = dest_ip
