@@ -15,6 +15,7 @@ services:
     networks:
       tcp_network:
         ipv4_address: 192.168.62.42
+    command: sh -c "tail -f /dev/null"
 
 networks:
   tcp_network:
