@@ -1,8 +1,8 @@
 # Network security fundamentals
 In this repository you will find examples of network communications and proof of concepts written in ruby 
-that can be tested with docker containers.
+running within docker containers.
 
-# How to start the containers
+# How to start a container
 
 ```
 cd arp_packets
