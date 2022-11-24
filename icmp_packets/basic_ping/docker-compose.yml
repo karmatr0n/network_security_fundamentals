@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+  ping:
+    build: ./ping
+    container_name: ping
+    restart: unless-stopped
+    networks:
+      net82:
+        ipv4_address: 192.168.82.42
+    command: sh -c "tail -f /dev/null"
+
+networks:
+  net82:
+    name: net82
+    ipam:
+      config:
+        - subnet: 192.168.82.0/24
