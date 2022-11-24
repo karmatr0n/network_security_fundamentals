@@ -5,7 +5,7 @@ ADD cve-2018-10933.patch /root
 ADD server.patch /root
 RUN apt-get update --assume-yes &&\
     apt-get upgrade --assume-yes &&\
-    apt-get install vim zlib1g zlib1g-dev libssl-dev openssh-client cmake build-essential neovim--assume-yes &&\
+    apt-get install vim zlib1g zlib1g-dev libssl-dev openssh-client cmake build-essential neovim --assume-yes &&\
     cp -r /root/libssh-0.8.3 /root/exploit-libssh-0.8.3 &&\
     cd /root/libssh-0.8.3 &&\
     mkdir build &&\
