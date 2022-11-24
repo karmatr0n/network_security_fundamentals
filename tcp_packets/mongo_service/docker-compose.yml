@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 37017:27017
+    networks:
+      net72:
+        ipv4_address: 192.168.72.11
+
+  mongo_client:
+    build: ./mongo_client
+    container_name: mongo_client
+    restart: unless-stopped
+    networks:
+      net72:
+        ipv4_address: 192.168.72.42
+    command: sh -c "tail -f /dev/null"
+
+networks:
+  net72:
+    name: net72
+    ipam:
+      config:
+        - subnet: 192.168.72.0/24
