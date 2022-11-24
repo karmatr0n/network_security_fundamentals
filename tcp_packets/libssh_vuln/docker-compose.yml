@@ -4,6 +4,8 @@ services:
     build: ./vuln_server
     container_name: vuln_server
     restart: unless-stopped
+    ports:
+      - 2222:22
     networks:
       ssh-network:
         ipv4_address: 192.168.52.11
