@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require 'socket'
 
 socket = TCPSocket.new('192.168.90.10', 1337)

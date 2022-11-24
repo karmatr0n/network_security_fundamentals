@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require 'socket'
 
 PORT = 1337

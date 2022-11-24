@@ -1,5 +1,5 @@
+#!/usr/bin/env ruby
 require 'packetfu'
-
 
 dest_ip = ARGV[0]
 file = ARGV[1]

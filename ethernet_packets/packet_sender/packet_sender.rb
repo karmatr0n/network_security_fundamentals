@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require 'packetfu'
 
 eth_pkt = PacketFu::EthPacket.new
